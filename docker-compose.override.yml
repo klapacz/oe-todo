@@ -1,0 +1,8 @@
+services:
+  be-auth:
+    build:
+      context: ./be-auth
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./be-auth:/app
+
