@@ -1,0 +1,3 @@
+[submodule "be-auth"]
+	path = be-auth
+	url = https://github.com/klapacz/oe-todo-auth
