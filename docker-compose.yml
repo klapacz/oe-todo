@@ -20,9 +20,11 @@ services:
   be-auth:
     build:
       context: ./be-auth
+    env_file:
+      - .env
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.be-auth.rule=Host(`auth.localhost`)"
+      - "traefik.http.routers.be-auth.rule=Host(`$BE_AUTH_HOST`)"
       - "traefik.http.routers.be-auth.entrypoints=web"
       - "traefik.http.services.be-auth.loadbalancer.server.port=80"
 
@@ -31,15 +33,15 @@ services:
       context: ./fe
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.fe.rule=Host(`localhost`)"
+      - "traefik.http.routers.fe.rule=Host(`$FE_HOST`)"
       - "traefik.http.routers.fe.entrypoints=web"
 
   db:
     image: postgres
     environment:
-      - POSTGRES_DB=auth
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=$BE_AUTH_DB
+    env_file:
+      - .env
     volumes:
       - db-data:/var/lib/postgresql/data
 
