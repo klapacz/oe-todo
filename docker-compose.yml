@@ -27,6 +27,8 @@ services:
       - "traefik.http.routers.be-auth.rule=Host(`$BE_AUTH_HOST`)"
       - "traefik.http.routers.be-auth.entrypoints=web"
       - "traefik.http.services.be-auth.loadbalancer.server.port=80"
+    links:
+      - "db:$POSTGRES_HOST"
 
   fe:
     build:
