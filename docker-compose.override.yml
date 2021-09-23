@@ -1,5 +1,6 @@
 services:
   be-auth:
+    tty: true
     build:
       context: ./be-auth
       dockerfile: Dockerfile.dev
